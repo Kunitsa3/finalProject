@@ -72,6 +72,7 @@ const Book = ({ name, pictureLink, author, description, id, collectionId }) => {
         <span className="book-title">{name}</span>
         <span className="book-author">{author}</span>
         <span className="book-description">{description}</span>
+        <span>Нужно удалить</span>
       </div>
     </div>
   );
