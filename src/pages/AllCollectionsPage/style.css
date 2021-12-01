@@ -1,0 +1,45 @@
+.all-collection-page-full-wrapper{
+  width: 1000px;
+  border-radius: 10px;
+  margin: 70px auto;
+  }
+
+  .filter-wrapper{margin-bottom: 15px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+  .filter-item{
+    border: 1px solid;
+    padding: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  .amount-book-filter-input{
+    width: 30px;
+    height: 25px;
+    background-color:  #efefef;
+    border: 1px solid;
+    border-radius: 4px;
+  }
+
+  .collection-filter-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    filter: blur(150px);
+    
+  }
+  
+  .all-collections-filter-wrapper{
+    position: relative;
+    overflow: hidden;
+  }
+
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  }

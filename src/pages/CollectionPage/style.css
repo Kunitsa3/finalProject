@@ -1,0 +1,21 @@
+.collection-page-full-wrapper{
+  background-color: white;
+  width: 1000px;
+  border-radius: 10px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.three-dots{
+  position: absolute;
+  top: 17px;
+  right: 10px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  z-index: 3;
+  cursor: pointer
+}

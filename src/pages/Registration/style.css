@@ -1,0 +1,46 @@
+.registration-form-wrapper {
+  padding: 24px 24px 16px;
+  margin: 24px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width: 500px;
+  border-radius: 10px;
+}
+
+.input-form-wrapper {
+  width: 380px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input-label {
+font-size: 24px;
+color: #6a6f73;
+margin-right: 12px;
+}
+
+.sign-up-button {
+  
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.title-wrapper{
+  color: #1c1d1f;
+  font-weight: 700;
+    font-size: 15px;
+    padding: 24px 64px 12px 0px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(209, 215, 220);
+}
+
+.input-values-wrapper {
+  padding-top: 20px;
+  
+}

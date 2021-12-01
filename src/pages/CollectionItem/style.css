@@ -1,0 +1,109 @@
+.collection-item-background{
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.8;
+  filter: blur(150px);
+  z-index: 1;
+}
+
+
+.collection-page-information-wrapper{ 
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid;
+  border-color: #ced4da;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+  .collection-title{
+    font-size: 24px;
+    color: black;
+    padding: 10px;
+    z-index: 2;
+  }
+
+  .number-of-books-wrapper{
+    font-size: 22px;
+    padding-top: 10px;
+    z-index: 2;
+  }
+
+.collection-title-wrapper{
+  display: flex;
+  justify-content: space-between;
+  padding-right: 40px;
+}
+
+  .collection-page-description{
+    font-size: 18px;
+    padding: 10px;
+    font-weight: 400;
+    z-index: 2;
+  }
+
+  .collection-page-book-picture{
+    width: 140px;
+    border: 1px solid;
+    border-radius: 5px;
+    opacity: 0.9;
+    z-index: 2;
+  }
+
+  .collection-page-book-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    z-index: 2;
+    padding: 20px;
+  }
+
+  .three-dots{
+    position: absolute;
+    top: 17px;
+    right: 10px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    z-index: 3;
+    cursor: pointer
+  }
+
+ 
+
+  .menu-icons-wrapper{
+    margin: 5px 5px 5px 5px;
+  }
+
+  .menu-item{cursor: pointer}
+
+  
+
+  .delete-item-text{font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    padding: 0 50px;}
+
+    .buttons-wrapper{
+      padding-top: 25px;
+      display: flex;
+      justify-content: space-around;
+      padding-left: 30px;
+      padding-right: 30px;
+
+    }
+  
+    .delete-item-btn{
+      padding: 10px 40px;
+      margin-left: 0;
+    }

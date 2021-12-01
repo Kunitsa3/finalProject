@@ -1,0 +1,12 @@
+.menu-item-wrapper{
+  border: 1px solid;
+  border-radius: 5px;
+  width: 100px;
+  background-color: white;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 40px;
+  right: 12px;
+}

@@ -1,0 +1,13 @@
+.delete-item-wrapper{
+  border: 1px solid;
+  border-radius: 5px;
+  width: 444px;
+  height: 227px;
+  background-color: white;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  top: 40px;
+}
