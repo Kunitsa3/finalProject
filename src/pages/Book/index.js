@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Button } from 'react-bootstrap';
 import { Pencil, ThreeDotsVertical, Trash } from 'react-bootstrap-icons';
 import { useHistory } from 'react-router-dom';
@@ -78,4 +78,4 @@ const Book = ({ name, pictureLink, author, description, id, collectionId }) => {
   );
 };
 
-export default Book;
+export default memo(Book);

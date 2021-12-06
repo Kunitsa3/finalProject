@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import setCollectionItem, { editCollectionItem, getCollectionsArray } from '../../store';
 import Book from '../Book';
@@ -6,20 +6,43 @@ import NewItem from './NewItem';
 import './style.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useHistory, useParams } from 'react-router-dom';
+import { promisifyLocalStorage } from '../../store/helper';
 
 const ItemModes = { edit: 'edit', view: 'view' };
 const itemInterface = { name: '', author: '', description: '', picture: '', mode: ItemModes.edit };
 
 const Collection = () => {
-  let { id } = useParams();
-  let collectionInformation = getCollectionsArray().find(item => item.id === id);
-  const [collectionValues, setCollectionValues] = useState({
-    name: collectionInformation ? collectionInformation.name : '',
-    description: collectionInformation ? collectionInformation.description : '',
-    picture: collectionInformation ? collectionInformation.picture : '',
-  });
-  const [item, setItem] = useState(id ? collectionInformation.item : []);
+  const { id } = useParams();
+
   const history = useHistory();
+
+  const [collectionInformation, setCollectionInformation] = useState({});
+  const [collectionValues, setCollectionValues] = useState({ name: '', description: '', picture: '' });
+  const [item, setItem] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await promisifyLocalStorage(getCollectionsArray);
+      console.log(id);
+      id
+        ? setCollectionInformation(data.find(item => item.id === id))
+        : setCollectionInformation({ name: '', description: '', picture: '' });
+    }
+    fetchData();
+  }, []);
+
+  console.log(collectionInformation);
+  useEffect(() => {
+    setCollectionValues({
+      name: collectionInformation.name,
+      description: collectionInformation.description,
+      picture: collectionInformation.picture,
+    });
+  }, [collectionInformation.name, collectionInformation.description, collectionInformation.picture]);
+
+  useEffect(() => {
+    setItem(id ? collectionInformation.item : []);
+  }, [collectionInformation.item]);
 
   const onNewItemClick = () => {
     setItem(oldItem => oldItem.concat(itemInterface));
@@ -48,12 +71,13 @@ const Collection = () => {
     }));
   };
 
-  id = id ? id : uuidv4();
-
   const handleSubmit = event => {
     event.preventDefault();
-    id ? editCollectionItem({ ...collectionValues, id, item }) : setCollectionItem({ ...collectionValues, id, item });
-    history.push(`/collectionPage/${id}`);
+    const newId = uuidv4();
+    id
+      ? editCollectionItem({ ...collectionValues, id, item })
+      : setCollectionItem({ ...collectionValues, id: newId, item });
+    history.push(`/collectionPage/${id || newId}`);
   };
 
   return (
@@ -87,7 +111,7 @@ const Collection = () => {
             <Form.Control type="picture" onChange={onInputChange} value={collectionValues.picture} name="picture" />
           </Form.Group>
         </div>
-        {item.map((element, index) =>
+        {item?.map((element, index) =>
           element.mode === ItemModes.edit ? (
             <NewItem
               handleSubmit={handleNewItemSubmit(index)}

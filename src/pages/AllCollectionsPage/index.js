@@ -1,12 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getCollectionsArray } from '../../store';
+import { promisifyLocalStorage } from '../../store/helper';
 import CollectionItem from '../CollectionItem';
 import './style.css';
+import clsx from 'clsx';
 
 const AllCollectionsPage = () => {
-  const collectionsArray = getCollectionsArray();
-
   const [bookAmount, setBookAmount] = useState(0);
+  const [collectionsArray, setCollectionsArray] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await promisifyLocalStorage(getCollectionsArray);
+      setCollectionsArray(data);
+    }
+    fetchData();
+  }, []);
+
   const onUpdateSearch = e => {
     setBookAmount(e.target.value);
   };
@@ -21,11 +31,15 @@ const AllCollectionsPage = () => {
 
   return (
     <div className="all-collection-page-full-wrapper">
-      <div className="filter-wrapper">
-        <span className="filter-item" onClick={onAllCollectionsClick}>
+      <div className={'filter-wrapper'}>
+        <span className={clsx('filter-item', !bookAmount && 'active-filter')} onClick={onAllCollectionsClick}>
           All collections
         </span>
-        <div className="amount-book-filter-wrapper filter-item">
+        <div
+          className={clsx('amount-book-filter-wrapper filter-item', bookAmount && 'active-filter')}
+          onClick={onAllCollectionsClick}
+        >
+          {' '}
           <span>Collections of more than </span>
           <input
             className="amount-book-filter-input"

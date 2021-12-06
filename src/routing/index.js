@@ -68,4 +68,9 @@ export const routes = [
     exact: true,
     key: '10',
   },
+  {
+    path: '/*',
+    component: Main,
+    key: '11',
+  },
 ];

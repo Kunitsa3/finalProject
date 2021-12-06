@@ -1,19 +1,25 @@
 import Book from '../Book';
 import { getCollectionsArray } from '../../store';
+import { promisifyLocalStorage } from '../../store/helper';
 import './style.css';
 import SearchItem from '../../SearchItem';
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const BooksPage = () => {
-  const booksInformation = getCollectionsArray()
-    .map(element => element.item)
-    .flat();
-
   const [searchString, setSearchString] = useState('');
+  const [booksInformation, setBooksInformation] = useState([]);
 
-  const onUpdateSearch = e => {
+  useEffect(() => {
+    async function fetchData() {
+      const data = await promisifyLocalStorage(getCollectionsArray);
+      setBooksInformation(data.map(element => element.item).flat());
+    }
+    fetchData();
+  }, []);
+
+  const memoizedOnUpdateSearch = useCallback(e => {
     setSearchString(e.target.value);
-  };
+  }, []);
 
   const searchEmp = (bookInformation, searchString) => {
     if (searchString === 0) {
@@ -32,7 +38,7 @@ const BooksPage = () => {
 
   return (
     <div className="books-page-wrapper">
-      <SearchItem onUpdateSearch={onUpdateSearch} searchString={searchString}></SearchItem>
+      <SearchItem onUpdateSearch={memoizedOnUpdateSearch} searchString={searchString}></SearchItem>
       {visibleBooksInformation.map(element => {
         return (
           <Book
@@ -41,6 +47,7 @@ const BooksPage = () => {
             description={element.description}
             pictureLink={element.picture}
             key={element.id}
+            id={element.id}
           ></Book>
         );
       })}
