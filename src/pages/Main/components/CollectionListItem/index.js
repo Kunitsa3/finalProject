@@ -14,12 +14,12 @@ const CollectionListItem = ({ name, likesAmount, id, picture }) => {
       <div className="collection-item-information-wrapper">
         <span className="collection-item-text">{name}</span>
         <div className="collection-item-likes-wrapper">
-          {likesAmount <= 10 ? <Heart></Heart> : likesAmount > 25 ? <HeartFill></HeartFill> : <HeartHalf></HeartHalf>}
+          {likesAmount <= 10 ? <Heart /> : likesAmount > 25 ? <HeartFill /> : <HeartHalf />}
           <span>{likesAmount}</span>
         </div>
       </div>
-      <img alt="Ничего не получилось :(" className="collection-item-background" src={picture}></img>
-      <img alt="Ничего не получилось :(" className="collection-item-picture" src={picture}></img>
+      <img alt="Ничего не получилось :(" className="collection-item-background" src={picture} />
+      <img alt="Ничего не получилось :(" className="collection-item-picture" src={picture} />
     </div>
   );
 };

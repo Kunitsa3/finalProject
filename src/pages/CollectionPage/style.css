@@ -1,12 +1,10 @@
-.collection-page-full-wrapper{
+.collection-page-full-wrapper {
   background-color: white;
-  width: 1000px;
   border-radius: 10px;
-  margin: 40px auto;
   padding: 20px;
 }
 
-.three-dots{
+.three-dots {
   position: absolute;
   top: 17px;
   right: 10px;

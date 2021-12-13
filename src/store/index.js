@@ -1,4 +1,4 @@
-const COLLECTIONS_ARRAY_KEY = 'COLLECTIONS_ARRAY_KEY';
+export const COLLECTIONS_ARRAY_KEY = 'COLLECTIONS_ARRAY_KEY';
 
 export const getCollectionsArray = () => JSON.parse(localStorage.getItem(COLLECTIONS_ARRAY_KEY)) || [];
 const setCollectionsArray = collection => localStorage.setItem(COLLECTIONS_ARRAY_KEY, JSON.stringify(collection));

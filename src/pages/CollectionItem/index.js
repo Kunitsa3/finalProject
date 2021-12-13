@@ -34,7 +34,7 @@ const CollectionItem = ({ name, description, items, booksAmount, id }) => {
         menuList={
           <>
             <div>
-              <Pencil className="menu-icons-wrapper"></Pencil>
+              <Pencil className="menu-icons-wrapper" />
               <span
                 className="menu-item"
                 onClick={() => {
@@ -45,7 +45,7 @@ const CollectionItem = ({ name, description, items, booksAmount, id }) => {
               </span>
             </div>
             <div>
-              <Trash className="menu-icons-wrapper"></Trash>
+              <Trash className="menu-icons-wrapper" />
               <span className="menu-item" onClick={onDeleteClick}>
                 Delete
               </span>
@@ -53,7 +53,7 @@ const CollectionItem = ({ name, description, items, booksAmount, id }) => {
           </>
         }
       >
-        <ThreeDotsVertical className="three-dots"></ThreeDotsVertical>
+        <ThreeDotsVertical className="three-dots" />
       </MenuItem>
       {isDeleteItemMenuOpened && (
         <DeleteItem
@@ -77,26 +77,24 @@ const CollectionItem = ({ name, description, items, booksAmount, id }) => {
               </div>
             </>
           }
-        ></DeleteItem>
+        />
       )}
       <span className="collection-page-description">{description}</span>
       <img
         className="collection-item-background"
         alt="Ничего не получилось :("
         src={items ? items[0].picture : 'https://www.livelib.ru/book/1000402963-teoriya-vsego-stiven-hoking'}
-      ></img>{' '}
+      />
       <div className="collection-page-book-wrapper">
         {items
-          ?.map(element => {
-            return (
-              <img
-                className="collection-page-book-picture"
-                alt="Ничего не получилось :("
-                src={element.picture}
-                key={element.id}
-              ></img>
-            );
-          })
+          ?.map(element => (
+            <img
+              className="collection-page-book-picture"
+              alt="Ничего не получилось :("
+              src={element.picture}
+              key={element.id}
+            />
+          ))
           .slice(0, 6)}
       </div>
     </div>

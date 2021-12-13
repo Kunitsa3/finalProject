@@ -88,7 +88,7 @@ const Collection = () => {
   };
 
   return (
-    <div className="collection-wrapper">
+    <div className="collection-wrapper container">
       <h1 className="collection-title-wrapper">New Collection</h1>
       <Form onSubmit={handleSubmit}>
         <div className="collection-information-wrapper">
@@ -133,7 +133,7 @@ const Collection = () => {
               onCancelClick={onCancelClick(index)}
               itemValues={element}
               key={index}
-            ></NewItem>
+            />
           ) : (
             <div key={element.id}>
               <Book
@@ -143,7 +143,7 @@ const Collection = () => {
                 pictureLink={element.picture}
                 id={element.id}
                 collectionId={id}
-              ></Book>
+              />
             </div>
           ),
         )}

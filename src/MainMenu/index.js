@@ -1,6 +1,5 @@
 import './style.css';
 import { BrightnessHighFill, MoonFill, PersonFill } from 'react-bootstrap-icons';
-import SearchPanel from './SearchPanel';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,26 +24,24 @@ const MainMenu = () => {
   ];
   return (
     <div className="main-menu-wrapper">
-      {pages.map((element, index) => {
-        return (
-          <p
-            className={getActivePageClassName(element.path)}
-            key={index}
-            onClick={() => {
-              history.push(element.path);
-            }}
-          >
-            {element.name}
-          </p>
-        );
-      })}
+      {pages.map((element, index) => (
+        <p
+          className={getActivePageClassName(element.path)}
+          key={index}
+          onClick={() => {
+            history.push(element.path);
+          }}
+        >
+          {element.name}
+        </p>
+      ))}
       {/* <SearchPanel className="main-menu-item"></SearchPanel> */}
       {theme !== 'white' ? (
-        <BrightnessHighFill className="main-menu-item" onClick={onChangeThemeClick}></BrightnessHighFill>
+        <BrightnessHighFill className="main-menu-item" onClick={onChangeThemeClick} />
       ) : (
-        <MoonFill className="main-menu-item" onClick={onChangeThemeClick}></MoonFill>
+        <MoonFill className="main-menu-item" onClick={onChangeThemeClick} />
       )}
-      <PersonFill className="main-menu-item"></PersonFill>
+      <PersonFill className="main-menu-item" />
     </div>
   );
 };

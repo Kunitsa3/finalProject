@@ -1,12 +1,11 @@
-import { ChevronCompactLeft, Heart } from 'react-bootstrap-icons';
-import { useDispatch } from 'react-redux';
+import { memo } from 'react';
 import './style.css';
 
 const ListItem = ({ name, author, picture }) => {
   return (
     <div className="list-item-fool-wrapper">
       <div className="list-item-wrapper">
-        <img alt="Ничего не получилось :(" className="list-item-background" src={picture}></img>
+        <img alt="Ничего не получилось :(" className="list-item-background" src={picture} />
       </div>
       <div>
         <p className="list-item-name">{name}</p>
@@ -20,4 +19,4 @@ const ListItem = ({ name, author, picture }) => {
   );
 };
 
-export default ListItem;
+export default memo(ListItem);

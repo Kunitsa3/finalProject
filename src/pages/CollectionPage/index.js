@@ -5,6 +5,7 @@ import './style.css';
 import CollectionItem from '../CollectionItem';
 import { useEffect, useState } from 'react';
 import { promisifyLocalStorage } from '../../store/helper';
+import Spinner from '../../Spinner';
 
 const CollectionPage = () => {
   const { id } = useParams();
@@ -21,33 +22,33 @@ const CollectionPage = () => {
 
   console.log(collectionInformation);
 
-  return collectionInformation ? (
-    <div className="collection-page-full-wrapper">
-      {
-        <CollectionItem
-          name={collectionInformation.name}
-          description={collectionInformation.description}
-          booksAmount={collectionInformation.item ? collectionInformation.item.length : '0'}
-          id={id}
-          items={collectionInformation.item}
-        ></CollectionItem>
-      }
-      {collectionInformation.item?.map(element => {
-        return (
-          <Book
-            name={element.name}
-            author={element.author}
-            description={element.description}
-            pictureLink={element.picture}
-            id={element.id}
-            collectionId={id}
-            key={element.id}
-          ></Book>
-        );
-      })}
+  return (
+    <div className="collection-page-full-wrapper container">
+      {collectionInformation ? (
+        <>
+          <CollectionItem
+            name={collectionInformation.name}
+            description={collectionInformation.description}
+            booksAmount={collectionInformation.item ? collectionInformation.item.length : '0'}
+            id={id}
+            items={collectionInformation.item}
+          />
+          {collectionInformation.item?.map(element => (
+            <Book
+              name={element.name}
+              author={element.author}
+              description={element.description}
+              pictureLink={element.picture}
+              id={element.id}
+              collectionId={id}
+              key={element.id}
+            />
+          ))}
+        </>
+      ) : (
+        <Spinner />
+      )}
     </div>
-  ) : (
-    <div className="collection-page-full-wrapper">LOADING </div>
   );
 };
 

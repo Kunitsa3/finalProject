@@ -13,9 +13,7 @@ const Item = () => {
     .find(element => element.id === id);
 
   const collectionId = getCollectionsArray()
-    .map(element => {
-      return element.item.find(bookElement => bookElement.id === id) ? element.id : '';
-    })
+    .map(element => (element.item.find(bookElement => bookElement.id === id) ? element.id : ''))
     .find(element => element);
 
   const [itemValues, setItemValues] = useState({
@@ -26,25 +24,22 @@ const Item = () => {
   });
 
   const memoizedOnInputChange = useCallback(event => {
-    setItemValues(OldValues => ({
-      ...OldValues,
+    setItemValues(oldValues => ({
+      ...oldValues,
       [event.target.name]: event.target.value,
     }));
   }, []);
 
-  const memoizedHandleSubmit = useCallback(event => {
-    event.preventDefault();
-    editBookItem({ ...itemValues, id }, collectionId);
-    history.push(`/collectionPage/${collectionId}`);
-  }, []);
-
-  return (
-    <NewItem
-      onInputChange={memoizedOnInputChange}
-      handleSubmit={memoizedHandleSubmit}
-      itemValues={itemValues}
-    ></NewItem>
+  const memoizedHandleSubmit = useCallback(
+    event => {
+      event.preventDefault();
+      editBookItem({ ...itemValues, id }, collectionId);
+      history.push(`/collectionPage/${collectionId}`);
+    },
+    [itemValues, id, collectionId, history],
   );
+
+  return <NewItem onInputChange={memoizedOnInputChange} handleSubmit={memoizedHandleSubmit} itemValues={itemValues} />;
 };
 
 export default Item;

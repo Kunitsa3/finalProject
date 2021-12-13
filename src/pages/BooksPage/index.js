@@ -4,10 +4,11 @@ import { promisifyLocalStorage } from '../../store/helper';
 import './style.css';
 import SearchItem from '../../SearchItem';
 import { useCallback, useEffect, useState } from 'react';
+import Spinner from '../../Spinner';
 
 const BooksPage = () => {
   const [searchString, setSearchString] = useState('');
-  const [booksInformation, setBooksInformation] = useState([]);
+  const [booksInformation, setBooksInformation] = useState();
 
   useEffect(() => {
     async function fetchData() {
@@ -25,7 +26,7 @@ const BooksPage = () => {
     if (searchString === 0) {
       return bookInformation;
     }
-    return bookInformation.filter(element => {
+    return bookInformation?.filter(element => {
       return (
         element?.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1 ||
         element?.author.toLowerCase().indexOf(searchString.toLowerCase()) > -1 ||
@@ -37,20 +38,18 @@ const BooksPage = () => {
   const visibleBooksInformation = searchEmp(booksInformation, searchString);
 
   return (
-    <div className="books-page-wrapper">
-      <SearchItem onUpdateSearch={memoizedOnUpdateSearch} searchString={searchString}></SearchItem>
-      {visibleBooksInformation.map(element => {
-        return (
-          <Book
-            name={element.name}
-            author={element.author}
-            description={element.description}
-            pictureLink={element.picture}
-            key={element.id}
-            id={element.id}
-          ></Book>
-        );
-      })}
+    <div className="container">
+      <SearchItem onUpdateSearch={memoizedOnUpdateSearch} searchString={searchString} />
+      {visibleBooksInformation?.map(element => (
+        <Book
+          name={element.name}
+          author={element.author}
+          description={element.description}
+          pictureLink={element.picture}
+          key={element.id}
+          id={element.id}
+        />
+      )) || <Spinner />}
     </div>
   );
 };

@@ -20,14 +20,14 @@ const Book = ({ name, pictureLink, author, description, id, collectionId }) => {
   return (
     <div className={clsx('book-item-full-wrapper', `${theme}`)}>
       <div className="book-picture-wrapper">
-        <img className="book-picture" alt="Ничего не получилось :(" src={pictureLink}></img>
+        <img className="book-picture" alt="Ничего не получилось :(" src={pictureLink} />
       </div>
       <div className="book-information-wrapper">
         <MenuItem
           menuList={
             <>
               <div>
-                <Pencil className="menu-icons-wrapper"></Pencil>
+                <Pencil className="menu-icons-wrapper" />
                 <span
                   className="menu-item"
                   onClick={() => {
@@ -38,7 +38,7 @@ const Book = ({ name, pictureLink, author, description, id, collectionId }) => {
                 </span>
               </div>
               <div>
-                <Trash className="menu-icons-wrapper"></Trash>
+                <Trash className="menu-icons-wrapper" />
                 <span className="menu-item" onClick={onDeleteClick}>
                   Delete
                 </span>
@@ -46,7 +46,7 @@ const Book = ({ name, pictureLink, author, description, id, collectionId }) => {
             </>
           }
         >
-          <ThreeDotsVertical className="three-dots"></ThreeDotsVertical>
+          <ThreeDotsVertical className="three-dots" />
         </MenuItem>
         {isDeleteItemMenuOpened && (
           <DeleteItem
@@ -70,7 +70,7 @@ const Book = ({ name, pictureLink, author, description, id, collectionId }) => {
                 </div>
               </>
             }
-          ></DeleteItem>
+          />
         )}
         <span className="book-title">{name}</span>
         <span className="book-author">{author}</span>

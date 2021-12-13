@@ -1,15 +1,3 @@
-.all-collection-page-full-wrapper {
-  width: 1000px;
-  border-radius: 10px;
-  margin: 70px auto;
-}
-
-@media (max-width: 800px) {
-  .all-collection-page-full-wrapper {
-    width: 600px;
-  }
-}
-
 .filter-wrapper {
   margin-bottom: 15px;
   display: flex;

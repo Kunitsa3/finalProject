@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
-import { Button, Carousel, CarouselItem } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { ChevronCompactLeft, ChevronCompactRight } from 'react-bootstrap-icons';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Spinner from '../../Spinner';
 import { getCollectionsArray } from '../../store';
 import { promisifyLocalStorage } from '../../store/helper';
 import CollectionList from './components/CollectionListItem';
@@ -12,8 +12,8 @@ import './style.css';
 
 const Main = () => {
   const history = useHistory();
-  const [bookInformation, setBookInformation] = useState([]);
-  const [firstSlide, setFirstSlide] = useState(0);
+  const [bookInformation, setBookInformation] = useState();
+  const [offset, setOffset] = useState(0);
   const numberOfSlides = 6;
 
   useEffect(() => {
@@ -24,33 +24,31 @@ const Main = () => {
     fetchData();
   }, []);
 
+  const isRightSlideActive = offset === (bookInformation?.length || 0) - numberOfSlides;
+
   const onSliderIncreaseClick = () => {
-    setFirstSlide(oldState => {
-      return oldState !== bookInformation.length - numberOfSlides ? oldState + 1 : oldState;
-    });
+    setOffset(isRightSlideActive ? offset + 1 : offset);
   };
 
   const onSliderDecreaseClick = () => {
-    setFirstSlide(oldState => {
-      return oldState !== 0 ? oldState - 1 : oldState;
-    });
+    setOffset(oldState => (oldState !== 0 ? oldState - 1 : oldState));
   };
+
+  const collectionsForCarousel = bookInformation?.slice(offset, offset + numberOfSlides);
+  const bestCollections = bookInformation?.slice(-3);
+
   return (
-    <div className="style-block">
+    <div className="style-block container">
       <h1 className="main-page-tittle-wrapper">Last added</h1>
       <div className="style-wrapper">
-        <div className={clsx('slider-arrow', !firstSlide && 'last-slide')} onClick={onSliderDecreaseClick}>
-          <ChevronCompactLeft></ChevronCompactLeft>
+        <div className={clsx('slider-arrow', !offset && 'last-slide')} onClick={onSliderDecreaseClick}>
+          <ChevronCompactLeft />
         </div>
-
-        {bookInformation.slice(firstSlide, firstSlide + numberOfSlides).map(element => (
-          <ListItem name={element.name} author={element.author} picture={element.picture}></ListItem>
-        ))}
-        <div
-          className={clsx('slider-arrow', firstSlide === bookInformation.length - numberOfSlides ? 'last-slide' : '')}
-          onClick={onSliderIncreaseClick}
-        >
-          <ChevronCompactRight></ChevronCompactRight>
+        {collectionsForCarousel?.map(element => (
+          <ListItem name={element.name} author={element.author} picture={element.picture} key={element.id} />
+        )) || <Spinner />}
+        <div className={clsx('slider-arrow', isRightSlideActive && 'last-slide')} onClick={onSliderIncreaseClick}>
+          <ChevronCompactRight />
         </div>
       </div>
       <div className="main-page-title-and-button-wrapper">
@@ -67,11 +65,9 @@ const Main = () => {
       </div>
 
       <div className="style-wrapper">
-        {getCollectionsArray()
-          .slice(-3)
-          .map(element => (
-            <CollectionList name={element.name} id={element.id} picture={element.picture}></CollectionList>
-          ))}
+        {bestCollections?.map(element => (
+          <CollectionList name={element.name} id={element.id} key={element.id} picture={element.picture} />
+        )) || <Spinner />}
       </div>
     </div>
   );

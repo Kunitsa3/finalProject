@@ -30,7 +30,7 @@ const Registration = () => {
         <h1 className="title-wrapper">Sign Up and start reading!</h1>
         <div className="input-values-wrapper">
           <InputGroup className="mb-3 input-form-wrapper">
-            <PersonFill className="input-label"></PersonFill>
+            <PersonFill className="input-label" />
             <FormControl
               placeholder="Full name"
               aria-label="Full name"
@@ -44,7 +44,7 @@ const Registration = () => {
           </InputGroup>
 
           <InputGroup className="mb-3 input-form-wrapper">
-            <Envelope className="input-label"></Envelope>
+            <Envelope className="input-label" />
             <FormControl
               placeholder="Email"
               aria-label="Email"
@@ -58,7 +58,7 @@ const Registration = () => {
           </InputGroup>
 
           <InputGroup className="mb-3 input-form-wrapper">
-            <Lock className="input-label"></Lock>
+            <Lock className="input-label" />
             <FormControl
               placeholder="Password"
               aria-label="Password"
@@ -72,7 +72,7 @@ const Registration = () => {
           </InputGroup>
 
           <InputGroup className="mb-3 input-form-wrapper">
-            <Lock className="input-label"></Lock>
+            <Lock className="input-label" />
             <FormControl
               placeholder="Confirm your password"
               aria-label="Password"

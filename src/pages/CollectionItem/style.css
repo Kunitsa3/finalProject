@@ -5,6 +5,7 @@
   opacity: 0.8;
   filter: blur(150px);
   z-index: 1;
+  max-height: 376px;
 }
 
 

@@ -3,7 +3,7 @@ import './style.css';
 
 const NewItem = ({ handleSubmit, onInputChange, itemValues }) => {
   return (
-    <div className="item-wrapper">
+    <div className="item-wrapper container">
       <h1 className="item-title-wrapper">New Book</h1>
       <Form onSubmit={handleSubmit}>
         <div className="item-information-wrapper">

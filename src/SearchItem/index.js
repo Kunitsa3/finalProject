@@ -9,7 +9,7 @@ const SearchItem = ({ onUpdateSearch, searchString }) => {
         placeholder="Search for books"
         value={searchString}
         onChange={onUpdateSearch}
-      ></input>
+      />
       <Button className="search-item-button">Search</Button>
     </div>
   );

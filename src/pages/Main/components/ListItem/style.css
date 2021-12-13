@@ -1,11 +1,11 @@
-.list-item-fool-wrapper{
+.list-item-fool-wrapper {
   width: calc(100% / 6);
   height: 400px;
   margin: 10px;
   border: 1px solid;
   border-radius: 8px;
   border-color: #07070767;
-  }
+}
 
 .list-item-wrapper {
   height: 240px;
@@ -13,7 +13,7 @@
 }
 
 
-.list-item-name{
+.list-item-name {
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
@@ -25,7 +25,7 @@
   height: 40px;
 }
 
-.list-item-author{
+.list-item-author {
   font-size: 12px;
   line-height: 16px;
   text-align: left;
@@ -36,26 +36,26 @@
   font-weight: 600;
 }
 
-.list-item-background{
+.list-item-background {
   height: 240px;
   width: 100%;
   padding: 2px;
 
 }
 
-.list-item-likes{
+.list-item-likes {
   margin-left: 10px;
   font-size: 22px;
   margin-top: 2px;
   color: brown;
 }
 
-.list-item-likes-number{
+.list-item-likes-number {
   margin-left: 10px;
   color: rgb(0, 0, 0);
 }
 
-.list-item-likes-information{
+.list-item-likes-information {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
