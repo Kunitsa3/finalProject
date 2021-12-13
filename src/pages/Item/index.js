@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import NewItem from './NewItem';
 import { editBookItem, getCollectionsArray } from '../../store';
 import './style.css';
@@ -18,8 +18,6 @@ const Item = () => {
     })
     .find(element => element);
 
-  console.log(collectionId);
-
   const [itemValues, setItemValues] = useState({
     name: bookInformation ? bookInformation.name : '',
     author: bookInformation ? bookInformation.author : '',
@@ -27,20 +25,26 @@ const Item = () => {
     picture: bookInformation ? bookInformation.picture : '',
   });
 
-  const onInputChange = event => {
+  const memoizedOnInputChange = useCallback(event => {
     setItemValues(OldValues => ({
       ...OldValues,
       [event.target.name]: event.target.value,
     }));
-  };
+  }, []);
 
-  const handleSubmit = event => {
+  const memoizedHandleSubmit = useCallback(event => {
     event.preventDefault();
     editBookItem({ ...itemValues, id }, collectionId);
     history.push(`/collectionPage/${collectionId}`);
-  };
+  }, []);
 
-  return <NewItem onInputChange={onInputChange} handleSubmit={handleSubmit} itemValues={itemValues}></NewItem>;
+  return (
+    <NewItem
+      onInputChange={memoizedOnInputChange}
+      handleSubmit={memoizedHandleSubmit}
+      itemValues={itemValues}
+    ></NewItem>
+  );
 };
 
 export default Item;

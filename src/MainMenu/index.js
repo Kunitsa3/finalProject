@@ -1,12 +1,18 @@
 import './style.css';
-import { PersonFill } from 'react-bootstrap-icons';
+import { BrightnessHighFill, MoonFill, PersonFill } from 'react-bootstrap-icons';
 import SearchPanel from './SearchPanel';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeTheme } from '../store/redux';
 
 const MainMenu = () => {
   const history = useHistory();
   const location = useLocation();
+  const theme = useSelector(state => state.appConfigurations.theme);
+  const dispatch = useDispatch();
+
+  const onChangeThemeClick = () => dispatch(changeTheme(theme === 'white' ? 'dark' : 'white'));
 
   const getActivePageClassName = path => {
     return clsx('main-menu-item', matchPath(location.pathname, { path: path }) && 'active');
@@ -32,7 +38,12 @@ const MainMenu = () => {
           </p>
         );
       })}
-      <SearchPanel className="main-menu-item"></SearchPanel>
+      {/* <SearchPanel className="main-menu-item"></SearchPanel> */}
+      {theme !== 'white' ? (
+        <BrightnessHighFill className="main-menu-item" onClick={onChangeThemeClick}></BrightnessHighFill>
+      ) : (
+        <MoonFill className="main-menu-item" onClick={onChangeThemeClick}></MoonFill>
+      )}
       <PersonFill className="main-menu-item"></PersonFill>
     </div>
   );

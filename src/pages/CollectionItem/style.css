@@ -107,3 +107,7 @@
       padding: 10px 40px;
       margin-left: 0;
     }
+
+    .available-for-click{
+      cursor: pointer;
+    }

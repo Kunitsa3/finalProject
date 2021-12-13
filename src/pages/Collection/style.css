@@ -5,7 +5,7 @@
  background-color: white;
  width: 800px;
  border-radius: 10px;
- margin: 40px auto;
+ margin: 80px auto;
  padding: 20px;
 }
 
@@ -38,12 +38,21 @@
   color: white;
   width: 150px;
   margin-bottom: 10px;
+  margin-left: 10px;
+  background-color: #8fabc4;
+  border-color: #8ca9c4;
 }
+
+.collection-button:hover {
+  background-color: #536f8a;
+  border-color: #536f8a;
+}
+
 
 .collection-button-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
  
@@ -60,10 +69,15 @@
  .new-item-input-values-wrapper .form-control{
    font-size: 12px;
  }
- 
- 
- .new-item-button {
-   color: white;
-   width: 150px;
+
+ .new-item-title-wrapper {
+  margin-right: 40px;
+  color: #5a5a5cde;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
  }
+
  

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Pencil, ThreeDotsVertical, Trash } from 'react-bootstrap-icons';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import DeleteItem from '../../DeleteItem';
 import MenuItem from '../../MenuItem';
 import { deleteCollectionItem } from '../../store';
@@ -9,6 +9,7 @@ import './style.css';
 
 const CollectionItem = ({ name, description, items, booksAmount, id }) => {
   const history = useHistory();
+  const location = useLocation();
   const [isDeleteItemMenuOpened, setIsDeleteItemMenuOpened] = useState(false);
   const onDeleteClick = () => {
     setIsDeleteItemMenuOpened(oldState => !oldState);
@@ -17,8 +18,17 @@ const CollectionItem = ({ name, description, items, booksAmount, id }) => {
   return (
     <div className="collection-page-information-wrapper">
       <div className="collection-title-wrapper">
-        <h1 className="collection-title">{name}</h1>
-        <h2 className="number-of-books-wrapper">{booksAmount} books</h2>
+        <h1
+          className={
+            location.pathname === `/collectionPage/${id}` ? 'collection-title' : 'collection-title available-for-click'
+          }
+          onClick={() => {
+            if (location.pathname !== `/collectionPage/${id}`) history.push(`collectionPage/${id}`);
+          }}
+        >
+          {name}
+        </h1>
+        <h2 className="number-of-books-wrapper">{booksAmount || '0'} books</h2>
       </div>
       <MenuItem
         menuList={
@@ -73,13 +83,18 @@ const CollectionItem = ({ name, description, items, booksAmount, id }) => {
       <img
         className="collection-item-background"
         alt="Ничего не получилось :("
-        src={items[0] ? items[0].picture : 'https://www.livelib.ru/book/1000402963-teoriya-vsego-stiven-hoking'}
+        src={items ? items[0].picture : 'https://www.livelib.ru/book/1000402963-teoriya-vsego-stiven-hoking'}
       ></img>{' '}
       <div className="collection-page-book-wrapper">
         {items
-          .map(element => {
+          ?.map(element => {
             return (
-              <img className="collection-page-book-picture" alt="Ничего не получилось :(" src={element.picture}></img>
+              <img
+                className="collection-page-book-picture"
+                alt="Ничего не получилось :("
+                src={element.picture}
+                key={element.id}
+              ></img>
             );
           })
           .slice(0, 6)}

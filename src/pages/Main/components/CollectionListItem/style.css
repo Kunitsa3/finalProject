@@ -1,5 +1,5 @@
 .collection-item-wrapper {
-  border: 2px solid;
+  border: 1px solid;
   border-color: rgb(2, 24, 24);
   width: calc(100% / 3);
   height: 232px;

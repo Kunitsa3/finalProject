@@ -5,17 +5,20 @@ import { useHistory } from 'react-router-dom';
 import DeleteItem from '../../DeleteItem';
 import MenuItem from '../../MenuItem';
 import { deleteBookItem } from '../../store';
+import clsx from 'clsx';
 import './style.css';
+import { useSelector } from 'react-redux';
 
 const Book = ({ name, pictureLink, author, description, id, collectionId }) => {
   const history = useHistory();
   const [isDeleteItemMenuOpened, setIsDeleteItemMenuOpened] = useState(false);
+  const theme = useSelector(state => state.appConfigurations.theme);
   const onDeleteClick = () => {
     setIsDeleteItemMenuOpened(oldState => !oldState);
   };
 
   return (
-    <div className="book-item-full-wrapper">
+    <div className={clsx('book-item-full-wrapper', `${theme}`)}>
       <div className="book-picture-wrapper">
         <img className="book-picture" alt="Ничего не получилось :(" src={pictureLink}></img>
       </div>
@@ -72,7 +75,6 @@ const Book = ({ name, pictureLink, author, description, id, collectionId }) => {
         <span className="book-title">{name}</span>
         <span className="book-author">{author}</span>
         <span className="book-description">{description}</span>
-        <span>Нужно удалить</span>
       </div>
     </div>
   );

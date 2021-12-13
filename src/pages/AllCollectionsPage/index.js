@@ -25,7 +25,7 @@ const AllCollectionsPage = () => {
   };
   const filterCollections = (collectionsArray, bookAmount) => {
     if (bookAmount === 0) return collectionsArray;
-    return collectionsArray.filter(element => element.item.length > bookAmount);
+    return collectionsArray.filter(element => element.item?.length > bookAmount);
   };
   const visibleCollections = filterCollections(collectionsArray, bookAmount);
 
@@ -56,7 +56,7 @@ const AllCollectionsPage = () => {
           <CollectionItem
             name={element.name}
             description={element.description}
-            booksAmount={element.item.length}
+            booksAmount={element.item ? element.item.length : '0'}
             id={element.id}
             items={element.item}
           ></CollectionItem>

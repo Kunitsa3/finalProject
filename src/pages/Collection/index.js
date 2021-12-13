@@ -23,7 +23,7 @@ const Collection = () => {
   useEffect(() => {
     async function fetchData() {
       const data = await promisifyLocalStorage(getCollectionsArray);
-      console.log(id);
+
       id
         ? setCollectionInformation(data.find(item => item.id === id))
         : setCollectionInformation({ name: '', description: '', picture: '' });
@@ -31,7 +31,6 @@ const Collection = () => {
     fetchData();
   }, []);
 
-  console.log(collectionInformation);
   useEffect(() => {
     setCollectionValues({
       name: collectionInformation.name,
@@ -41,11 +40,19 @@ const Collection = () => {
   }, [collectionInformation.name, collectionInformation.description, collectionInformation.picture]);
 
   useEffect(() => {
-    setItem(id ? collectionInformation.item : []);
+    setItem(collectionInformation.item ? collectionInformation.item.reverse() : []);
   }, [collectionInformation.item]);
 
   const onNewItemClick = () => {
-    setItem(oldItem => oldItem.concat(itemInterface));
+    setItem(oldItem => [itemInterface, ...oldItem]);
+  };
+
+  console.log(item);
+
+  const onCancelClick = index => () => {
+    setItem(oldItem => {
+      return oldItem.filter((element, elementIndex) => elementIndex !== index);
+    });
   };
 
   const onNewItemInputChange = index => event => {
@@ -90,7 +97,6 @@ const Collection = () => {
             <Form.Control type="name" onChange={onInputChange} value={collectionValues.name} name="name" required />
           </Form.Group>
         </div>
-
         <div className="collection-information-wrapper">
           <p className="collection-titles-wrapper">Collection description</p>
           <Form.Group className="mb-3 collection-input-values-wrapper " controlId="exampleForm.ControlTextarea1">
@@ -104,40 +110,43 @@ const Collection = () => {
             />
           </Form.Group>
         </div>
-
         <div className="collection-information-wrapper">
           <p className="collection-titles-wrapper">Link to external picture</p>
           <Form.Group className="mb-3 collection-input-values-wrapper" controlId="formBasicPicture">
             <Form.Control type="picture" onChange={onInputChange} value={collectionValues.picture} name="picture" />
           </Form.Group>
         </div>
-        {item?.map((element, index) =>
+        <div className="collection-button-wrapper">
+          <Button className="collection-button" onClick={onNewItemClick}>
+            Add new book
+          </Button>
+          <Button type="submit" className="collection-button">
+            Submit
+          </Button>
+        </div>
+
+        {item.map((element, index) =>
           element.mode === ItemModes.edit ? (
             <NewItem
               handleSubmit={handleNewItemSubmit(index)}
               onInputChange={onNewItemInputChange(index)}
+              onCancelClick={onCancelClick(index)}
               itemValues={element}
+              key={index}
             ></NewItem>
           ) : (
-            <div>
+            <div key={element.id}>
               <Book
                 name={element.name}
                 author={element.author}
                 description={element.description}
                 pictureLink={element.picture}
                 id={element.id}
+                collectionId={id}
               ></Book>
             </div>
           ),
         )}
-        <div className="collection-button-wrapper">
-          <Button variant="info" className="collection-button" onClick={onNewItemClick}>
-            Add new book
-          </Button>
-          <Button variant="info" type="submit" className="collection-button">
-            Submit
-          </Button>
-        </div>
       </Form>
     </div>
   );

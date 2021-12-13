@@ -1,9 +1,10 @@
 import { Button, Form } from 'react-bootstrap';
 import './style.css';
 
-const NewItem = ({ handleSubmit, onInputChange, itemValues }) => {
+const NewItem = ({ handleSubmit, onInputChange, onCancelClick, itemValues }) => {
   return (
     <div>
+      <h1 className="new-item-title-wrapper"> Adding a new book</h1>
       <Form>
         <div className="new-item-information-wrapper">
           <Form.Group className="mb-3 new-item-input-values-wrapper" controlId="formBasicName">
@@ -50,15 +51,12 @@ const NewItem = ({ handleSubmit, onInputChange, itemValues }) => {
             <Form.Control type="picture" onChange={onInputChange} value={itemValues.picture} name="picture" />
           </Form.Group>
         </div>
-        <div className="new-item-button-wrapper">
-          <Button
-            variant="info"
-            size="lg"
-            onClick={handleSubmit}
-            className="new-item-button"
-            placeholder="Link to external picture"
-          >
+        <div className="collection-button-wrapper">
+          <Button onClick={handleSubmit} className="collection-button" placeholder="Link to external picture">
             Submit
+          </Button>
+          <Button onClick={onCancelClick} className="collection-button" placeholder="Link to external picture">
+            Cancel
           </Button>
         </div>
       </Form>

@@ -27,12 +27,12 @@ const CollectionPage = () => {
         <CollectionItem
           name={collectionInformation.name}
           description={collectionInformation.description}
-          booksAmount={collectionInformation.item.length}
+          booksAmount={collectionInformation.item ? collectionInformation.item.length : '0'}
           id={id}
           items={collectionInformation.item}
         ></CollectionItem>
       }
-      {collectionInformation.item.map(element => {
+      {collectionInformation.item?.map(element => {
         return (
           <Book
             name={element.name}
@@ -41,6 +41,7 @@ const CollectionPage = () => {
             pictureLink={element.picture}
             id={element.id}
             collectionId={id}
+            key={element.id}
           ></Book>
         );
       })}

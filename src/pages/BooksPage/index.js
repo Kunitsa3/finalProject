@@ -3,7 +3,7 @@ import { getCollectionsArray } from '../../store';
 import { promisifyLocalStorage } from '../../store/helper';
 import './style.css';
 import SearchItem from '../../SearchItem';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const BooksPage = () => {
   const [searchString, setSearchString] = useState('');
@@ -27,9 +27,9 @@ const BooksPage = () => {
     }
     return bookInformation.filter(element => {
       return (
-        element.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1 ||
-        element.author.toLowerCase().indexOf(searchString.toLowerCase()) > -1 ||
-        element.description.toLowerCase().indexOf(searchString.toLowerCase()) > -1
+        element?.name.toLowerCase().indexOf(searchString.toLowerCase()) > -1 ||
+        element?.author.toLowerCase().indexOf(searchString.toLowerCase()) > -1 ||
+        element?.description.toLowerCase().indexOf(searchString.toLowerCase()) > -1
       );
     });
   };

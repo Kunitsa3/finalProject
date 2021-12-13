@@ -12,6 +12,7 @@ export const editCollectionItem = collectionItem =>
 export const deleteCollectionItem = collectionId =>
   setCollectionsArray(getCollectionsArray().filter(element => element.id !== collectionId));
 export const deleteBookItem = (bookId, collectionId) => {
+  console.log(collectionId);
   const collectionInformation = getCollectionsArray().find(element => element.id === collectionId);
   const newCollectionItems = collectionInformation.item.filter(element => element.id !== bookId);
   const newCollectionInformation = { ...collectionInformation, item: newCollectionItems };

@@ -1,4 +1,5 @@
-import { Heart } from 'react-bootstrap-icons';
+import { ChevronCompactLeft, Heart } from 'react-bootstrap-icons';
+import { useDispatch } from 'react-redux';
 import './style.css';
 
 const ListItem = ({ name, author, picture }) => {
@@ -11,10 +12,10 @@ const ListItem = ({ name, author, picture }) => {
         <p className="list-item-name">{name}</p>
         <p className="list-item-author">{author}</p>
       </div>
-      <div className="list-item-likes-information">
+      {/* <div className="list-item-likes-information">
         <Heart className="list-item-likes"></Heart>
         <p className="list-item-likes-number">238</p>
-      </div>
+      </div> */}
     </div>
   );
 };
